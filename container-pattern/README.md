@@ -1,9 +1,10 @@
-## Container Pattern
+## Container/Presentational Pattern
 
-This pattern enforces separation of concerns is by using the `Container/Presentational` pattern. With this pattern, we can separate the view from the application logic.
+This pattern enforces separation of concerns. With this pattern, we can separate the view from the application logic:
+- **Presentational Components**: Components that care about how data is shown to the user. Eg: `UserInfo` component.
+- **Container Components**: Components that care about what data is shown to the user. Eg: `UserLoaderVx` component.
 
-**Presentational Components**: Components that care about how data is shown to the user. Eg: UserInfo component.
-**Container Components**: Components that care about what data is shown to the user. Eg: UserLoaderVx component.
+### Variation #1
 
 This approach is tightly coupled to the `current-user` endpoint
 What if we want to display a user based on `id`
@@ -32,6 +33,8 @@ export const UserLoaderV1 = ({ children }) => {
 };
 ```
 
+### Variation #2
+
 This solution is slightly generic that takes `userId` as props.
 What if we pass `resource url` and `resource name` to make it more generic.
 
@@ -59,6 +62,8 @@ export const UserLoaderV2 = ({ userId, children }) => {
 };
 ```
 
+### Variation #3
+
 Now this implementation is even more generic; this will not only works for displaying user details but details of any resource until and unless we pass a valid url (resourceUrl) and key (resourceName). 
 
 ```javascript
@@ -84,6 +89,8 @@ export const CurrentUserLoaderV3 = ({ resourceName, resourceUrl, children }) => 
     );
 };
 ```
+
+### Variation #4
 
 We can extract the data fetching logic out of this component
 
@@ -122,6 +129,8 @@ export const CurrentUserLoaderV4 = ({ getData = () => { }, resourceName, childre
     );
 };
 ```
+
+### Variation #5
 
 Using `Container/Presentational` pattern with a render prop variation
 
